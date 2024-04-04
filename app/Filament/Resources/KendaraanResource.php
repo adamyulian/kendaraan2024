@@ -9,11 +9,13 @@ use App\Models\Kendaraan;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Illuminate\Support\Facades\Auth;
+use Filament\Forms\Components\Section;
+use Filament\Tables\Actions\ExportAction;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Exports\KendaraanExporter;
 use App\Filament\Resources\KendaraanResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\KendaraanResource\RelationManagers;
-use Filament\Forms\Components\Section;
 
 class KendaraanResource extends Resource
 {
@@ -31,7 +33,76 @@ class KendaraanResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('nopol')
                             ->columnSpan(1),
-                        Forms\Components\TextInput::make('opd')
+                        Forms\Components\Select::make('opd')
+                            ->options([
+                                'BAGIAN HUKUM DAN KERJASAMA'=>'BAGIAN HUKUM DAN KERJASAMA',
+                                'BAGIAN ORGANISASI'=>'BAGIAN ORGANISASI',
+                                'BAGIAN PEREKONOMIAN DAN SUMBER DAYA ALAM'=>'BAGIAN PEREKONOMIAN DAN SUMBER DAYA ALAM',
+                                'BAGIAN UMUM, PROTOKOL DAN KOMUNIKASI PIMPINAN'=>'BAGIAN UMUM, PROTOKOL DAN KOMUNIKASI PIMPINAN',
+                                'DINAS PERUMAHAN RAKYAT DAN PEMUKIMAN SERTA PERTANAHAN'=>'DINAS PERUMAHAN RAKYAT DAN PEMUKIMAN SERTA PERTANAHAN',
+                                'DINAS SUMBER DAYA AIR DAN BINA MARGA'=>'DINAS SUMBER DAYA AIR DAN BINA MARGA',
+                                'INSPEKTORAT'=>'INSPEKTORAT',
+                                'BADAN KEPEGAWAIAN DAN PENGEMBANGAN SUMBER DAYA MANUSIA'=>'BADAN KEPEGAWAIAN DAN PENGEMBANGAN SUMBER DAYA MANUSIA',
+                                'BADAN KESATUAN BANGSA, POLITIK DAN PERLINDUNGAN MASYARAKAT'=>'BADAN KESATUAN BANGSA, POLITIK DAN PERLINDUNGAN MASYARAKAT',
+                                'BADAN PENDAPATAN DAN PAJAK DAERAH'=>'BADAN PENDAPATAN DAN PAJAK DAERAH',
+                                'BADAN PENGELOLAAN KEUANGAN DAN ASET DAERAH'=>'BADAN PENGELOLAAN KEUANGAN DAN ASET DAERAH',
+                                'BADAN PERENCANAAN PEMBANGUNAN DAERAH, PENELITIAN DAN PENGEMBANGAN'=>'BADAN PERENCANAAN PEMBANGUNAN DAERAH, PENELITIAN DAN PENGEMBANGAN',
+                                'BAGIAN PEMERINTAHAN DAN KESEJAHTERAAN RAKYAT'=>'BAGIAN PEMERINTAHAN DAN KESEJAHTERAAN RAKYAT',
+                                'BAGIAN PENGADAAN BARANG/JASA DAN ADMINISTRASI PEMBANGUNAN'=>'BAGIAN PENGADAAN BARANG/JASA DAN ADMINISTRASI PEMBANGUNAN',
+                                'DINAS KOMUNIKASI DAN INFORMATIKA'=>'DINAS KOMUNIKASI DAN INFORMATIKA',
+                                'DINAS PEMBERDAYAAN PEREMPUAN DAN PERLINDUNGAN ANAK SERTA PENGENDALIAN PENDUDUK DAN KELUARGA BERENCANA'=>'DINAS PEMBERDAYAAN PEREMPUAN DAN PERLINDUNGAN ANAK SERTA PENGENDALIAN PENDUDUK DAN KELUARGA BERENCANA',
+                                'KECAMATAN ASEMROWO'=>'KECAMATAN ASEMROWO',
+                                'KECAMATAN BENOWO'=>'KECAMATAN BENOWO',
+                                'KECAMATAN BUBUTAN'=>'KECAMATAN BUBUTAN',
+                                'KECAMATAN BULAK'=>'KECAMATAN BULAK',
+                                'KECAMATAN DUKUH PAKIS'=>'KECAMATAN DUKUH PAKIS',
+                                'KECAMATAN GAYUNGAN'=>'KECAMATAN GAYUNGAN',
+                                'KECAMATAN GENTENG'=>'KECAMATAN GENTENG',
+                                'KECAMATAN GUBENG'=>'KECAMATAN GUBENG',
+                                'KECAMATAN GUNUNG ANYAR'=>'KECAMATAN GUNUNG ANYAR',
+                                'KECAMATAN JAMBANGAN'=>'KECAMATAN JAMBANGAN',
+                                'KECAMATAN KARANGPILANG'=>'KECAMATAN KARANGPILANG',
+                                'KECAMATAN KENJERAN'=>'KECAMATAN KENJERAN',
+                                'KECAMATAN KREMBANGAN'=>'KECAMATAN KREMBANGAN',
+                                'KECAMATAN LAKARSANTRI'=>'KECAMATAN LAKARSANTRI',
+                                'KECAMATAN MULYOREJO'=>'KECAMATAN MULYOREJO',
+                                'KECAMATAN PABEAN CANTIAN'=>'KECAMATAN PABEAN CANTIAN',
+                                'KECAMATAN PAKAL'=>'KECAMATAN PAKAL',
+                                'KECAMATAN RUNGKUT'=>'KECAMATAN RUNGKUT',
+                                'KECAMATAN SAMBIKEREP'=>'KECAMATAN SAMBIKEREP',
+                                'KECAMATAN SAWAHAN'=>'KECAMATAN SAWAHAN',
+                                'KECAMATAN SEMAMPIR'=>'KECAMATAN SEMAMPIR',
+                                'KECAMATAN SIMOKERTO'=>'KECAMATAN SIMOKERTO',
+                                'KECAMATAN SUKOLILO'=>'KECAMATAN SUKOLILO',
+                                'KECAMATAN SUKOMANUNGGAL'=>'KECAMATAN SUKOMANUNGGAL',
+                                'KECAMATAN TAMBAKSARI'=>'KECAMATAN TAMBAKSARI',
+                                'KECAMATAN TANDES'=>'KECAMATAN TANDES',
+                                'KECAMATAN TEGALSARI'=>'KECAMATAN TEGALSARI',
+                                'KECAMATAN TENGGILIS MEJOYO'=>'KECAMATAN TENGGILIS MEJOYO',
+                                'KECAMATAN WIYUNG'=>'KECAMATAN WIYUNG',
+                                'KECAMATAN WONOCOLO'=>'KECAMATAN WONOCOLO',
+                                'KECAMATAN WONOKROMO'=>'KECAMATAN WONOKROMO',
+                                'SEKRETARIAT DPRD'=>'SEKRETARIAT DPRD',
+                                'DINAS PERHUBUNGAN'=>'DINAS PERHUBUNGAN',
+                                'SATUAN POLISI PAMONG PRAJA'=>'SATUAN POLISI PAMONG PRAJA',
+                                'DINAS KEBUDAYAAN, KEPEMUDAAN DAN OLAH RAGA SERTA PARIWISATA'=>'DINAS KEBUDAYAAN, KEPEMUDAAN DAN OLAH RAGA SERTA PARIWISATA',
+                                'DINAS KEBUDAYAAN, KEPEMUDAAN DAN OLAHRAGA SERTA PARIWISATA'=>'DINAS KEBUDAYAAN, KEPEMUDAAN DAN OLAHRAGA SERTA PARIWISATA',
+                                'DINAS KEPENDUDUKAN DAN PENCATATAN SIPIL'=>'DINAS KEPENDUDUKAN DAN PENCATATAN SIPIL',
+                                'DINAS KOPERASI USAHA KECIL DAN MENENGAH DAN PERDAGANGAN'=>'DINAS KOPERASI USAHA KECIL DAN MENENGAH DAN PERDAGANGAN',
+                                'DINAS PEMADAM KEBAKARAN DAN PENYELAMATAN'=>'DINAS PEMADAM KEBAKARAN DAN PENYELAMATAN',
+                                'DINAS PENANAMAN MODAL DAN PELAYANAN TERPADU SATU PINTU'=>'DINAS PENANAMAN MODAL DAN PELAYANAN TERPADU SATU PINTU',
+                                'DINAS PERPUSTAKAAN DAN KEARSIPAN'=>'DINAS PERPUSTAKAAN DAN KEARSIPAN',
+                                'RSUD BHAKTI DHARMA HUSADA'=>'RSUD BHAKTI DHARMA HUSADA',
+                                'RSUD DR SOEWANDHIE'=>'RSUD DR SOEWANDHIE',
+                                'BADAN PENANGGULANGAN BENCANA DAERAH'=>'BADAN PENANGGULANGAN BENCANA DAERAH',
+                                'DINAS KESEHATAN'=>'DINAS KESEHATAN',
+                                'DINAS KETAHANAN PANGAN DAN PERTANIAN'=>'DINAS KETAHANAN PANGAN DAN PERTANIAN',
+                                'DINAS LINGKUNGAN HIDUP'=>'DINAS LINGKUNGAN HIDUP',
+                                'DINAS PENDIDIKAN'=>'DINAS PENDIDIKAN',
+                                'DINAS PERINDUSTRIAN DAN TENAGA KERJA'=>'DINAS PERINDUSTRIAN DAN TENAGA KERJA',
+                                'DINAS SOSIAL'=>'DINAS SOSIAL',
+                            ])
+                            ->native(false)
                             ->columnSpan(1),
                         Forms\Components\TextInput::make('tahun')
                             ->columnSpan(1),
@@ -82,6 +153,10 @@ class KendaraanResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->headerActions([
+                ExportAction::make()
+                    ->exporter(KendaraanExporter::class)
+            ])
             ->modifyQueryUsing(function (Builder $query) {
 
                 if (Auth::user()->name === 'admin') {
