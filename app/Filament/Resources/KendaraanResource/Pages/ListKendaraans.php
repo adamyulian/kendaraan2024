@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\KendaraanResource;
+use App\Filament\Resources\KendaraanResource\Widgets\StatsOverview;
 use Filament\Resources\Pages\ListRecords\Tab;
 
 class ListKendaraans extends ListRecords
@@ -18,6 +19,16 @@ class ListKendaraans extends ListRecords
         return [
             Actions\CreateAction::make(),
         ];
+    }
+
+
+    protected function getHeaderWidgets(): array
+    {
+
+            return [
+                StatsOverview::class
+            ];
+
     }
 
     public function getTabs(): array
