@@ -51,7 +51,8 @@ class KendaraanResource extends Resource
                 Section::make('Checklist Kendaraan')
                     ->columns(2)
                     ->schema([
-                        Forms\Components\DatePicker::make('tgl_masuk'),
+                        Forms\Components\DatePicker::make('tgl_masuk')
+                            ->required(),
                         Forms\Components\Select::make('lokasi_new')
                             ->options([
                                 'Balaikota Dalam' => 'Balaikota Dalam',
