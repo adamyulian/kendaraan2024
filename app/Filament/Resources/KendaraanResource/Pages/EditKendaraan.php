@@ -10,6 +10,8 @@ class EditKendaraan extends EditRecord
 {
     protected static string $resource = KendaraanResource::class;
 
+    protected static ?string $title = 'Cek Kendaraan';
+
     protected function getHeaderActions(): array
     {
         return [
