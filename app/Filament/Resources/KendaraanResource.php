@@ -107,9 +107,9 @@ class KendaraanResource extends Resource
                 //     ->searchable(),
                 // Tables\Columns\TextColumn::make('lokasi')
                 //     ->searchable(),
-                Tables\Columns\TextColumn::make('tgl_masuk')
-                    ->date()
-                    ->sortable(),
+                // Tables\Columns\TextColumn::make('tgl_masuk')
+                //     ->date()
+                //     ->sortable(),
                 // Tables\Columns\IconColumn::make('kunci_mobil')
                 //     ->boolean(),
                 // Tables\Columns\IconColumn::make('stnk')
