@@ -147,11 +147,12 @@ class KendaraanResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->label('Cek'),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+            // ->bulkActions([
+            //     Tables\Actions\BulkActionGroup::make([
+            //         Tables\Actions\DeleteBulkAction::make(),
+            //     ]),
+            // ])
+            ;
     }
 
     public static function getRelations(): array
