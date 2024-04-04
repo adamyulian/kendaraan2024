@@ -26,7 +26,8 @@ class KendaraanResource extends Resource
         return $form
             ->schema([
                 Section::make('Informasi Kendaraan')
-                    ->columns(2)
+                    ->columns(1)
+                    ->collapsible()
                     ->schema([
                         Forms\Components\TextInput::make('nopol')
                             ->columnSpan(1),
@@ -49,7 +50,7 @@ class KendaraanResource extends Resource
                             ->native(false),
                     ]),
                 Section::make('Checklist Kendaraan')
-                    ->columns(2)
+                    ->columns(1)
                     ->schema([
                         Forms\Components\DatePicker::make('tgl_masuk')
                             ->required(),
@@ -69,7 +70,7 @@ class KendaraanResource extends Resource
                         Forms\Components\Toggle::make('ban_serep'),
                         Forms\Components\Toggle::make('headunit'),
                         Forms\Components\Toggle::make('lepas_aki')
-                            ->columnSpan(2),
+                            ->columnSpan(1),
                         Forms\Components\FileUpload::make('foto_kendaraan')
                             ->image(),
                         Forms\Components\DatePicker::make('tgl_keluar'),
