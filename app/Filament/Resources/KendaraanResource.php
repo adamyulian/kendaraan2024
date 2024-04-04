@@ -143,8 +143,9 @@ class KendaraanResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label('Cek'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
