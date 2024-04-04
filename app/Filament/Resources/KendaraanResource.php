@@ -98,14 +98,14 @@ class KendaraanResource extends Resource
                 Tables\Columns\TextColumn::make('opd')
                     ->wrap()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('tahun')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('merk')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('tipe')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('lokasi')
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('tahun')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('merk')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('tipe')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('lokasi')
+                //     ->searchable(),
                 Tables\Columns\TextColumn::make('tgl_masuk')
                     ->date()
                     ->sortable(),
